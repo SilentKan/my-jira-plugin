@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<atlassian-plugin key="${project.groupId}.${project.artifactId}"
+                  name="My Plugin"
+                  plugins-version="2">
+
+
+
+  <plugin-info>
+    <description>My plugin description</description>
+    <version>1.0.0</version>
+    <vendor name="Example Company" url="https://example.com"/>
+  </plugin-info>
+
+
+
+  <!-- Сервлет для React -->
+  <servlet name="My React Page Servlet"
+           key="my-react-page"
+           class="com.example.plugin.MyReactPageServlet">
+    <url-pattern>/plugins/servlet/my-react-page</url-pattern>
+  </servlet>
+
+  <!-- REST API -->
+  <rest key="my-rest" path="/myplugin" version="1.0">
+    <description>Provides REST endpoints for the plugin</description>
+    <package>com.example.plugin</package>
+  </rest>
+
+</atlassian-plugin>

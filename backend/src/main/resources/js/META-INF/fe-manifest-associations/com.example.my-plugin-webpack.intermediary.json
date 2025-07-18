@@ -1,0 +1,7 @@
+{
+  "packageName": "my-jira-plugin-frontend",
+  "outputDirectoryFiles": [
+    "my-plugin.js",
+    "my-plugin.js.LICENSE.txt"
+  ]
+}
