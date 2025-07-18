@@ -1,14 +1,21 @@
-package com.example.plugin;
+package com.example.plugin.api;
 
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
-import com.example.plugin.api.MyPluginComponent;
 
 
-import javax.inject.Named;
+import org.springframework.stereotype.Component;
 
-@Named
+
+
 @ExportAsService({MyPluginComponent.class})
+@Component
 public class MyPluginComponentImpl implements MyPluginComponent {
+
+
+    public MyPluginComponentImpl() {
+        System.out.println(">>> MyPluginComponentImpl создан");
+    }
+
     @Override
     public String getData() {
         return "Hello from MyPluginComponent!";

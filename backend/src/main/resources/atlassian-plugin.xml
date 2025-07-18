@@ -16,14 +16,16 @@
   <!-- Сервлет для React -->
   <servlet name="My React Page Servlet"
            key="my-react-page"
-           class="com.example.plugin.MyReactPageServlet">
+           class="com.example.plugin.MyReactPageServlet"
+           system="false">
     <url-pattern>/plugins/servlet/my-react-page</url-pattern>
+    <load-on-startup>1</load-on-startup>
   </servlet>
 
   <!-- REST API -->
   <rest key="my-rest" path="/myplugin" version="1.0">
     <description>Provides REST endpoints for the plugin</description>
-    <package>com.example.plugin</package>
+    <package>com.example.plugin.api</package>
   </rest>
 
 </atlassian-plugin>
