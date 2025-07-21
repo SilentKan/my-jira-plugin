@@ -1,15 +1,12 @@
 package com.example.plugin.api;
 
 
-import com.atlassian.jira.component.ComponentAccessor;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 
 @Path("/data")
@@ -19,8 +16,9 @@ public class MyRestResource {
 
     private final MyPluginComponent pluginComponent;
 
-    public MyRestResource() {
-        this.pluginComponent = ComponentAccessor.getOSGiComponentInstanceOfType(MyPluginComponent.class);
+    @Autowired
+    public MyRestResource(MyPluginComponent pluginComponent) {
+        this.pluginComponent = pluginComponent;
     }
 
     @GET

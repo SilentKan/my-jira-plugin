@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<atlassian-plugin key="${project.groupId}.${project.artifactId}"
+<atlassian-plugin key="com.example.my-jira-plugin-backend"
                   name="My Plugin"
                   plugins-version="2">
-
-
 
   <plugin-info>
     <description>My plugin description</description>
     <version>1.0.0</version>
     <vendor name="Example Company" url="https://example.com"/>
   </plugin-info>
-
-
 
   <!-- Сервлет для React -->
   <servlet name="My React Page Servlet"
