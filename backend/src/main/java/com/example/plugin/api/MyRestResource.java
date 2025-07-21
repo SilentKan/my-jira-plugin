@@ -1,12 +1,10 @@
 package com.example.plugin.api;
 
 
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 
 @Path("/data")
@@ -16,7 +14,7 @@ public class MyRestResource {
 
     private final MyPluginComponent pluginComponent;
 
-    @Autowired
+    @Inject
     public MyRestResource(MyPluginComponent pluginComponent) {
         this.pluginComponent = pluginComponent;
     }
