@@ -12,11 +12,19 @@
   <!-- Сервлет для React -->
   <servlet name="My React Page Servlet"
            key="my-react-page"
-           class="com.example.plugin.MyReactPageServlet"
-           system="false">
-    <url-pattern>/plugins/servlet/my-react-page</url-pattern>
+           class="com.example.plugin.MyReactPageServlet">
+    <url-pattern>/my-react-page</url-pattern>
     <load-on-startup>1</load-on-startup>
   </servlet>
+
+  <web-resource key="my-plugin-resources" name="My Plugin Web Resources">
+    <resource type="download" name="my-plugin.js" location="/js/my-plugin.js"/>
+    <context>my-react-page</context>
+  </web-resource>
+
+
+
+
 
   <!-- REST API -->
   <rest key="my-rest" path="/myplugin" version="1.0">

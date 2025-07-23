@@ -14,7 +14,7 @@ const MyComponent: React.FC = () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await fetch('/rest/myapi/1.0/data', {
+            const response = await fetch('/rest/myplugin/1.0/data', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
