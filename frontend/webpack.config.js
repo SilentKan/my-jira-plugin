@@ -7,11 +7,11 @@ module.exports = {
         'my-plugin': './src/index.tsx',
     },
     output: {
-        path: path.resolve(__dirname, '../backend/target/classes'), // генерация в META-INF
+        path: path.resolve(__dirname, '../backend/src/main/resources'),
         filename: 'js/[name].js',
         library: '[name]',
-        libraryTarget: 'amd', // обязательно для WRM :contentReference[oaicite:1]{index=1}
-        publicPath: '', // без префикса
+        libraryTarget: 'amd',
+        publicPath: '',
     },
     module: {
         rules: [
@@ -19,7 +19,10 @@ module.exports = {
                 test: /\.(ts|tsx)$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
-                options: { presets: ['@babel/preset-env','@babel/preset-react','@babel/preset-typescript'] },
+                options: { 
+                    presets: ['@babel/preset-env','@babel/preset-react','@babel/preset-typescript'],
+                    plugins: ['@babel/plugin-transform-runtime']
+                },
             },
             {
                 test: /\.css$/i,
@@ -27,23 +30,49 @@ module.exports = {
             },
         ],
     },
-    resolve: { extensions: ['.tsx','.ts','.js','.jsx'] },
+    resolve: { 
+        extensions: ['.tsx','.ts','.js','.jsx'],
+        fallback: {
+            "react": false,
+            "react-dom": false
+        }
+    },
+    externals: {
+        'react': {
+            amd: 'react',
+            root: 'React',
+            commonjs2: 'react',
+            commonjs: 'react'
+        },
+        'react-dom': {
+            amd: 'react-dom',
+            root: 'ReactDOM',
+            commonjs2: 'react-dom',
+            commonjs: 'react-dom'
+        }
+    },
     optimization: {
         runtimeChunk: false,
     },
     plugins: [
         new WrmPlugin({
             pluginKey: 'com.example.my-jira-plugin-backend',
-            xmlDescriptors: path.resolve(__dirname, '../backend/target/classes/META-INF/plugin-descriptors/wr-defs.xml'),
+            xmlDescriptors: path.resolve(__dirname, '../backend/src/main/resources/META-INF/plugin-descriptors/wr-defs.xml'),
             contextMap: { 'my-plugin': ['my-react-page'] },
             providedDependencies: {
-                react: {
-                    dependency: 'com.atlassian.auiplugin:ajs-react',
-                    import: { amd: 'react', var: 'React' }
+                'react': {
+                    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:react',
+                    import: { 
+                        amd: 'react',
+                        var: 'React'
+                    }
                 },
                 'react-dom': {
-                    dependency: 'com.atlassian.auiplugin:ajs-react-dom',
-                    import: { amd: 'react-dom', var: 'ReactDOM' }
+                    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:react-dom',
+                    import: { 
+                        amd: 'react-dom',
+                        var: 'ReactDOM'
+                    }
                 }
             },
             verbose: true,
@@ -52,7 +81,5 @@ module.exports = {
             filename: 'css/[name].css',
             runtime: false,
         }),
-
-
     ],
 };

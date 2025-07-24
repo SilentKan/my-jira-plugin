@@ -23,27 +23,43 @@ public class MyReactPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=utf-8");
 
+        // Подключаем базовые ресурсы Atlassian
+        webResourceManager.requireResourcesForContext("atl.general");
+        webResourceManager.requireResourcesForContext("atl.global");
+        
         // Подключаем Web Resource по ключу из atlassian-plugin.xml
         webResourceManager.requireResource("com.example.my-jira-plugin-backend:my-plugin");
 
-        String html = """
-                <html>
-                  <head>
-                    <meta charset="UTF-8">
-                    <title>My React Page</title>
-                    %s
-                  </head>
-                  <body>
-                    <div id="my-plugin-container"></div>
-                    <script>
-                      WRM.require("wr!com.example.my-jira-plugin-backend:my-plugin", function () {
-                        console.log("✅ React app loading...");
-                      });
-                    </script>
-                  </body>
-                </html>
-                """.formatted(webResourceManager.getRequiredResources(UrlMode.RELATIVE));
+        StringBuilder html = new StringBuilder();
+        html.append("<!DOCTYPE html>\n")
+            .append("<html>\n")
+            .append("  <head>\n")
+            .append("    <meta charset=\"UTF-8\">\n")
+            .append("    <title>My React Page</title>\n")
+            .append("    ").append(webResourceManager.getRequiredResources(UrlMode.RELATIVE)).append("\n")
+            .append("  </head>\n")
+            .append("  <body>\n")
+            .append("    <div id=\"my-plugin-container\"></div>\n")
+            .append("    <script>\n")
+            .append("      // Дожидаемся полной загрузки AUI и WRM\n")
+            .append("      (function waitForAUI() {\n")
+            .append("        if (window.AJS && window.WRM) {\n")
+            .append("          // Дожидаемся загрузки всех ресурсов\n")
+            .append("          WRM.require(['wr!com.example.my-jira-plugin-backend:my-plugin'])\n")
+            .append("            .then(function() {\n")
+            .append("              console.log('✅ React app loading...');\n")
+            .append("            })\n")
+            .append("            .catch(function(error) {\n")
+            .append("              console.error('❌ Error loading React app:', error);\n")
+            .append("            });\n")
+            .append("        } else {\n")
+            .append("          setTimeout(waitForAUI, 100);\n")
+            .append("        }\n")
+            .append("      })();\n")
+            .append("    </script>\n")
+            .append("  </body>\n")
+            .append("</html>");
 
-        resp.getWriter().write(html);
+        resp.getWriter().write(html.toString());
     }
 }
