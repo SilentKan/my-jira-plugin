@@ -19,12 +19,11 @@
 
   <web-resource key="my-plugin" name="React Plugin Resources">
     <dependency>com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager</dependency>
+    <dependency>com.atlassian.plugins.atlassian-plugins-webresource-rest:rest-api</dependency>
     <resource type="download" name="my-plugin.js" location="js/my-plugin.js"/>
     <resource type="download" name="my-plugin.css" location="css/my-plugin.css"/>
-    <context>my-react-page</context> <!-- имя контекста должно совпадать с тем, что в Webpack -->
+    <context>my-react-page</context>
   </web-resource>
-
-
 
   <!-- REST API -->
   <rest key="my-rest" path="/myplugin" version="1.0">
