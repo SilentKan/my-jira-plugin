@@ -35,6 +35,11 @@ public class MyReactPageServlet extends HttpServlet {
                   </head>
                   <body>
                     <div id="my-plugin-container"></div>
+                    <script>
+                      WRM.require("wr!com.example.my-jira-plugin-backend:my-plugin", function () {
+                        console.log("✅ React app loading...");
+                      });
+                    </script>
                   </body>
                 </html>
                 """.formatted(webResourceManager.getRequiredResources(UrlMode.RELATIVE));
