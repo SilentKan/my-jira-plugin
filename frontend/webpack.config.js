@@ -9,8 +9,10 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../backend/src/main/resources'),
         filename: 'js/[name].js',
-        library: '[name]',
-        libraryTarget: 'amd',
+        library: {
+            type: 'amd',
+            name: 'my-plugin'
+        },
         publicPath: '',
     },
     module: {
@@ -31,28 +33,15 @@ module.exports = {
         ],
     },
     resolve: { 
-        extensions: ['.tsx','.ts','.js','.jsx'],
-        fallback: {
-            "react": false,
-            "react-dom": false
-        }
+        extensions: ['.tsx','.ts','.js','.jsx']
     },
     externals: {
-        'react': {
-            amd: 'react',
-            root: 'React',
-            commonjs2: 'react',
-            commonjs: 'react'
-        },
-        'react-dom': {
-            amd: 'react-dom',
-            root: 'ReactDOM',
-            commonjs2: 'react-dom',
-            commonjs: 'react-dom'
-        }
+        'react': 'react',
+        'react-dom': 'react-dom'
     },
     optimization: {
         runtimeChunk: false,
+        minimize: false
     },
     plugins: [
         new WrmPlugin({
@@ -62,24 +51,20 @@ module.exports = {
             providedDependencies: {
                 'react': {
                     dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:react',
-                    import: { 
-                        amd: 'react',
-                        var: 'React'
-                    }
+                    import: { amd: 'react' }
                 },
                 'react-dom': {
                     dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:react-dom',
-                    import: { 
-                        amd: 'react-dom',
-                        var: 'ReactDOM'
-                    }
+                    import: { amd: 'react-dom' }
                 }
             },
             verbose: true,
+            debug: true
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
             runtime: false,
         }),
     ],
+    devtool: 'source-map'
 };
