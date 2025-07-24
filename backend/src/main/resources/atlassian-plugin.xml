@@ -17,12 +17,12 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
 
-  <web-resource key="my-plugin-resources" name="My Plugin Web Resources">
-    <resource type="download" name="my-plugin.js" location="/js/my-plugin.js"/>
-    <context>my-react-page</context>
+  <web-resource key="my-plugin" name="React Plugin Resources">
+    <dependency>com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager</dependency>
+    <resource type="download" name="my-plugin.js" location="js/my-plugin.js"/>
+    <resource type="download" name="my-plugin.css" location="css/my-plugin.css"/>
+    <context>my-react-page</context> <!-- имя контекста должно совпадать с тем, что в Webpack -->
   </web-resource>
-
-
 
 
 
