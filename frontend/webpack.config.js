@@ -4,14 +4,13 @@ const WrmPlugin = require('atlassian-webresource-webpack-plugin');
 
 module.exports = {
     entry: {
-        'my-plugin': './src/index.tsx',
+        'my-plugin': './src/index.tsx'
     },
     output: {
         path: path.resolve(__dirname, '../backend/src/main/resources'),
         filename: 'js/[name].js',
         library: {
             type: 'amd',
-            name: 'my-plugin'
         },
         publicPath: '',
     },
@@ -47,15 +46,25 @@ module.exports = {
         new WrmPlugin({
             pluginKey: 'com.example.my-jira-plugin-backend',
             xmlDescriptors: path.resolve(__dirname, '../backend/src/main/resources/META-INF/plugin-descriptors/wr-defs.xml'),
-            contextMap: { 'my-plugin': ['my-react-page'] },
+            contextMap: {
+                'my-plugin': ['my-react-page']
+            },
             providedDependencies: {
-                'react': {
-                    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:react',
-                    import: { amd: 'react' }
+                react: {
+                    dependency: 'com.atlassian.auiplugin:ajs-react',
+                    import: { amd: 'react', var: 'React' }
                 },
                 'react-dom': {
-                    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:react-dom',
-                    import: { amd: 'react-dom' }
+                    dependency: 'com.atlassian.auiplugin:ajs-react-dom',
+                    import: { amd: 'react-dom', var: 'ReactDOM' }
+                },
+                'wrm/require': {
+                    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager',
+                    import: { amd: 'wrm/require' }
+                },
+                'wrm/context-path': {
+                    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path',
+                    import: { amd: 'wrm/context-path' }
                 }
             },
             verbose: true,

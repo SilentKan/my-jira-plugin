@@ -24,7 +24,9 @@ public class MyReactPageServlet extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
 
         // Подключаем Web Resource по ключу из atlassian-plugin.xml
-        webResourceManager.requireResource("com.example.my-jira-plugin-backend:my-plugin");
+        webResourceManager.requireResource("com.example.my-jira-plugin-backend:entrypoint-my-plugin");
+
+
 
         StringBuilder html = new StringBuilder();
         html.append("<!DOCTYPE html>\n")
@@ -43,15 +45,13 @@ public class MyReactPageServlet extends HttpServlet {
             .append("          console.log('✅ WRM found, initializing...');\n")
             .append("          // Сначала загружаем все зависимости\n")
             .append("          Promise.all([\n")
-            .append("            WRM.require('wrc!com.example.my-jira-plugin-backend:my-plugin'),\n")
-            .append("            WRM.require('wrc!com.atlassian.plugins.atlassian-plugins-webresource-rest:react'),\n")
-            .append("            WRM.require('wrc!com.atlassian.plugins.atlassian-plugins-webresource-rest:react-dom')\n")
+            .append("            WRM.require('wr!com.example.my-jira-plugin-backend:entrypoint-my-plugin'),\n")
             .append("          ])\n")
             .append("          .then(function() {\n")
             .append("            console.log('✅ All resources loaded');\n")
             .append("            // Теперь загружаем наш модуль\n")
             .append("            return new Promise(function(resolve) {\n")
-            .append("              require(['my-plugin'], function(module) {\n")
+            .append("              require(['entrypoint-my-plugin'], function(module) {\n")
             .append("                console.log('✅ Module loaded:', module);\n")
             .append("                resolve(module);\n")
             .append("              });\n")
