@@ -10,7 +10,8 @@ module.exports = {
         path: path.resolve(__dirname, '../backend/src/main/resources'),
         filename: 'js/[name].js',
         library: {
-            type: 'amd',
+            name: 'entrypoint-my-plugin',
+            type: 'amd'
         },
         publicPath: '',
     },
@@ -35,8 +36,8 @@ module.exports = {
         extensions: ['.tsx','.ts','.js','.jsx']
     },
     externals: {
-        'react': 'react',
-        'react-dom': 'react-dom'
+        react: 'jira/api/react-18',
+        'react-dom': 'jira/api/react-dom-18'
     },
     optimization: {
         runtimeChunk: false,
@@ -46,17 +47,15 @@ module.exports = {
         new WrmPlugin({
             pluginKey: 'com.example.my-jira-plugin-backend',
             xmlDescriptors: path.resolve(__dirname, '../backend/src/main/resources/META-INF/plugin-descriptors/wr-defs.xml'),
-            contextMap: {
-                'my-plugin': ['my-react-page']
-            },
+            webResourceKey: 'entrypoint-my-plugin',
             providedDependencies: {
                 react: {
-                    dependency: 'com.atlassian.auiplugin:ajs-react',
-                    import: { amd: 'react', var: 'React' }
+                    dependency: 'com.atlassian.plugins.jira-frontend-api:react-18',
+                    import: { amd: 'jira/api/react-18', var: 'React' }
                 },
                 'react-dom': {
-                    dependency: 'com.atlassian.auiplugin:ajs-react-dom',
-                    import: { amd: 'react-dom', var: 'ReactDOM' }
+                    dependency: 'com.atlassian.plugins.jira-frontend-api:react-dom-18',
+                    import: {amd: 'jira/api/react-dom-18', var: 'ReactDOM'}
                 },
                 'wrm/require': {
                     dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager',
