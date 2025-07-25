@@ -56,14 +56,6 @@ module.exports = {
                 'react-dom': {
                     dependency: 'com.atlassian.plugins.jira-frontend-api:react-dom-18',
                     import: {amd: 'jira/api/react-dom-18', var: 'ReactDOM'}
-                },
-                'wrm/require': {
-                    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager',
-                    import: { amd: 'wrm/require' }
-                },
-                'wrm/context-path': {
-                    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-plugin:context-path',
-                    import: { amd: 'wrm/context-path' }
                 }
             },
             verbose: true,
