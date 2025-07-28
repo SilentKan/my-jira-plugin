@@ -39,7 +39,7 @@ public class MyReactPageServlet extends HttpServlet {
                 <div id="my-plugin-container"></div>
                 <script>
                   WRM.require('wr!com.example.my-jira-plugin-backend:entrypoint-my-plugin').then(function() {
-                    require(['entrypoint-my-plugin'], function(mod) {
+                    require(['my-plugin'], function(mod) {
                       if (mod?.default) {
                         mod.default();
                       } else {

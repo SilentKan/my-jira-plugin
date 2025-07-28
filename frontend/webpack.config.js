@@ -9,6 +9,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../backend/src/main/resources'),
         filename: 'js/[name].js',
+        library: '[name]',
         libraryTarget: 'amd',
         publicPath: '',
     },
