@@ -9,6 +9,9 @@
     <vendor name="Example Company" url="https://example.com"/>
   </plugin-info>
 
+
+  <web-resource-import key="wr-defs" file="META-INF/plugin-descriptors/wr-defs.xml"/>
+
   <!-- Сервлет для React -->
   <servlet name="My React Page Servlet"
            key="my-react-page"

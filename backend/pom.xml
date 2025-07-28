@@ -180,6 +180,7 @@
                     </instructions>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>com.atlassian.plugin</groupId>
                 <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
@@ -189,18 +190,16 @@
                         <goals>
                             <goal>atlassian-spring-scanner</goal>
                         </goals>
-                        <!-- process-classes seems to be skipped if you are using scala
-                             so perhaps use prepare-package -->
                         <phase>process-classes</phase>
                     </execution>
                 </executions>
                 <configuration>
-                    <!-- Enable this to get build-time logging of annotations atlassian-spring-scanner-maven-plugin has noticed -->
                     <verbose>false</verbose>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
 
     <repositories>
         <repository>
