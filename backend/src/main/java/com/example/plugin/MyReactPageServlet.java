@@ -23,7 +23,8 @@ public class MyReactPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=utf-8");
 
-        // Подключаем нужный Web Resource
+        // ВАЖНО: сначала подтягиваем WRM менеджер, потом уже свой бандл
+        webResourceManager.requireResource("com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager");
         webResourceManager.requireResource("com.example.my-jira-plugin-backend:entrypoint-my-plugin");
 
         String html = """
@@ -38,17 +39,21 @@ public class MyReactPageServlet extends HttpServlet {
               <body>
                 <div id="my-plugin-container"></div>
                 <script>
-                  WRM.require('wr!com.example.my-jira-plugin-backend:entrypoint-my-plugin').then(function() {
-                    require(['my-plugin'], function(mod) {
-                      if (mod?.default) {
-                        mod.default();
-                      } else {
-                        console.error('❌ No default export in module');
-                      }
+                  if (typeof WRM === 'undefined') {
+                    console.error('WRM is undefined. web-resource-manager is likely not loaded.');
+                  } else {
+                    WRM.require('wr!com.example.my-jira-plugin-backend:entrypoint-my-plugin').then(function() {
+                      require(['my-plugin'], function(mod) {
+                        if (mod?.default) {
+                          mod.default();
+                        } else {
+                          console.error('No default export in module');
+                        }
+                      });
+                    }).catch(function(err) {
+                      console.error('Failed to load web resources:', err);
                     });
-                  }).catch(function(err) {
-                    console.error('❌ Failed to load web resources:', err);
-                  });
+                  }
                 </script>
               </body>
             </html>

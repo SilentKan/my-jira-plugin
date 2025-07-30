@@ -5,14 +5,13 @@
 
   <plugin-info>
     <description>My plugin description</description>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <vendor name="Example Company" url="https://example.com"/>
   </plugin-info>
 
 
   <web-resource-import key="wr-defs" file="META-INF/plugin-descriptors/wr-defs.xml"/>
 
-  <!-- Сервлет для React -->
   <servlet name="My React Page Servlet"
            key="my-react-page"
            class="com.example.plugin.MyReactPageServlet">
@@ -20,7 +19,6 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
 
-  <!-- REST API -->
   <rest key="my-rest" path="/myplugin" version="1.0">
     <description>Provides REST endpoints for the plugin</description>
     <package>com.example.plugin.api</package>

@@ -41,10 +41,11 @@ module.exports = {
     externals: {
         react: 'jira/api/react-18',
         'react-dom': 'jira/api/react-dom-18',
+        wr: 'wr',
     },
     optimization: {
         minimize: false,
-        runtimeChunk: 'single'
+        runtimeChunk: false
     },
     plugins: [
         new WrmPlugin({
@@ -63,7 +64,12 @@ module.exports = {
                     dependency: 'com.atlassian.plugins.jira-frontend-api:react-dom-18',
                     import: { amd: 'jira/api/react-dom-18', var: 'ReactDOM' },
                 },
+                'web-resource-manager': {
+                    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager',
+                    import: { amd: 'wr', var: 'WRM' },
+                },
             },
+            usedDependencies: ['web-resource-manager'],
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
