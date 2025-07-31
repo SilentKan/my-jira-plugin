@@ -177,6 +177,7 @@
                         </Export-Package>
                         <Spring-Context>*</Spring-Context>
                         <Import-Package>*</Import-Package>
+                        <Atlassian-Scan-Folders>META-INF/plugin-descriptors</Atlassian-Scan-Folders>
                     </instructions>
                 </configuration>
             </plugin>

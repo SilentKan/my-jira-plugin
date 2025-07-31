@@ -10,7 +10,7 @@
   </plugin-info>
 
 
-  <web-resource-import key="wr-defs" file="META-INF/plugin-descriptors/wr-defs.xml"/>
+ <!-- <web-resource-import key="wr-defs" file="META-INF/plugin-descriptors/wr-defs.xml"/> -->
 
   <servlet name="My React Page Servlet"
            key="my-react-page"
