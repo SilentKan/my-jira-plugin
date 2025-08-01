@@ -28,6 +28,11 @@ module.exports = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js', '.jsx'],
+        alias: {
+            'jira/api/react-18': false,
+            'jira/api/react-dom-18': false,
+            'wrm/require': false,
+        },
     },
 
 
@@ -60,20 +65,26 @@ module.exports = {
             ),
             webResourceKey: 'entrypoint-my-plugin',
             externals: {
-                react: 'jira/api/react-18',
-                'react-dom': 'jira/api/react-dom-18',
+                'jira/api/react-18': 'jira/api/react-18',
+                'jira/api/react-dom-18': 'jira/api/react-dom-18',
+                'wrm/require': 'wrm/require',
             },
+
             providedDependencies: {
                 react: {
                     dependency: 'com.atlassian.plugins.jira-frontend-api:react-18',
-                    import: { amd: 'jira/api/react-18' },
+                    import: { amd: 'jira/api/react-18', var: 'React' },
                 },
                 'react-dom': {
                     dependency: 'com.atlassian.plugins.jira-frontend-api:react-dom-18',
-                    import: { amd: 'jira/api/react-dom-18' },
+                    import: { amd: 'jira/api/react-dom-18', var: 'ReactDOM' },
+                },
+                'wrm/require': {
+                    dependency: 'com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager',
+                    import: { amd: 'wrm/require', var: 'WRMRequire' },
                 },
             },
-
+            usedDependencies: ['react', 'react-dom', 'wrm/require'],
         }),
         new MiniCssExtractPlugin({ filename: 'css/[name].css' }),
     ],
