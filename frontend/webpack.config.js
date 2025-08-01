@@ -13,6 +13,7 @@ module.exports = {
         libraryTarget: 'amd',
         library: '[name]', // модуль получит имя, равное ключу точки входа (my-plugin)
         publicPath: '',
+        chunkLoadingGlobal: 'webpackChunk_myPlugin'
     },
 
     resolve: {
@@ -41,7 +42,7 @@ module.exports = {
     },
     optimization: {
         minimize: false,
-        runtimeChunk: false,
+        runtimeChunk: 'single',
     },
     plugins: [
         new WrmPlugin({
