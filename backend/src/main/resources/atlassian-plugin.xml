@@ -10,7 +10,11 @@
   </plugin-info>
 
 
- <!-- <web-resource-import key="wr-defs" file="META-INF/plugin-descriptors/wr-defs.xml"/> -->
+  <web-resource key="split_my-plugin">
+    <resource type="download" name="css/my-plugin.css" location="css/my-plugin.css"/>
+    <resource type="download" name="js/my-plugin.js" location="js/my-plugin.js"/>
+  </web-resource>
+
 
   <servlet name="My React Page Servlet"
            key="my-react-page"

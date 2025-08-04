@@ -23,45 +23,31 @@ public class MyReactPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=utf-8");
 
-        // Подключаем WRM и web‑resource нашего плагина
-        webResourceManager.requireResource("com.atlassian.plugins.atlassian-plugins-webresource-rest:web-resource-manager");
-        webResourceManager.requireResource("com.example.my-jira-plugin-backend:entrypoint-my-plugin");
+        // Загружаем WRM-теги, чтобы css подтянулся
+        webResourceManager.requireResource("com.example.my-jira-plugin-backend:split_my-plugin");
 
         String html = """
-            <!DOCTYPE html>
-            <html>
-            <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>My React Page</title>
-              %s
-            </head>
-            <body>
-              <div id="my-plugin-container"></div>
-              <script>
-                // Загружаем web‑resource (css/js) через WRM
-                WRM.require('com.example.my-jira-plugin-backend:entrypoint-my-plugin')
-                  .then(function() {
-                    // После загрузки web‑resource импортируем AMD‑модуль,
-                    // имя которого совпадает с entry‑point ('my-plugin')
-                    require(['my-plugin'], function(mod) {
-                      if (mod && typeof mod.default === 'function') {
-                        mod.default();
-                      } else if (typeof mod === 'function') {
-                        mod();
-                      } else {
-                        console.error('Cannot initialize module:', mod);
-                      }
-                    });
-                  })
-                  .catch(function(err) {
-                    console.error('Failed to load web resources:', err);
-                  });
-              </script>
-            </body>
-            </html>
-            """.formatted(webResourceManager.getRequiredResources(UrlMode.RELATIVE));
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="UTF-8">
+            <title>My Plugin</title>
+            %s
+          </head>
+          <body>
+            <div id="my-plugin-container"></div>
+            <script src="%s"></script>
+            <script>
+              window.initMyPlugin();
+            </script>
+          </body>
+        </html>
+        """.formatted(
+                webResourceManager.getRequiredResources(UrlMode.RELATIVE),
+                req.getContextPath() + "/download/resources/com.example.my-jira-plugin-backend:split_my-plugin/js/my-plugin.js"
+        );
 
         resp.getWriter().write(html);
     }
+
 }
