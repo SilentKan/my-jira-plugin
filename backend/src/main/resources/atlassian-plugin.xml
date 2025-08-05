@@ -5,7 +5,7 @@
 
   <plugin-info>
     <description>My plugin description</description>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <vendor name="Example Company" url="https://example.com"/>
   </plugin-info>
 
