@@ -29,15 +29,14 @@
   </rest>
 
   <!-- Секция в меню администратора -->
-  <web-section key="react-plugin-admin-section"
-               location="admin_plugins_menu"
-               weight="100">
+  <!-- Секция в левом меню -->
+  <web-section key="react-ui-section" location="admin_plugins_menu" weight="100">
     <label>React UI</label>
   </web-section>
 
-  <web-item key="react-plugin-link" section="admin_plugins_menu/react-plugin-admin-section" weight="10">
-    <label>Test form</label>
-    <link linkId="react-plugin-link">/plugins/servlet/my-react-page</link>
+  <web-item key="react-ui-item" section="admin_plugins_menu/react-ui-section" weight="10">
+    <label>My React Page</label>
+    <link>/plugins/servlet/my-react-page</link>
   </web-item>
 
 </atlassian-plugin>
