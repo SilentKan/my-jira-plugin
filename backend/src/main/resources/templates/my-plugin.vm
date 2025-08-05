@@ -2,8 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="decorator" content="atl.admin">
-    <meta name="admin.active.section" content="react-ui-section">
-    <meta name="admin.active.tab" content="react-ui-item">
+    <meta name="admin.active.section" content="admin_plugins_menu">
     <title>My Plugin Admin Page</title>
     $webResourceManager.getRequiredResources()
 </head>
