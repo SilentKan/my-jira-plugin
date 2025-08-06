@@ -4,21 +4,28 @@
     <meta name="decorator" content="atl.admin">
     <meta name="admin.active.section" content="admin_plugins_menu">
     <title>My Plugin Admin Page</title>
-    $webResourceManager.getRequiredResources()
+    <style>
+        h2.page-title {
+            text-align: center;
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+
+        #my-plugin-container {
+            min-height: calc(100vh - 240px);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
-<section class="aui-page-panel">
-    <header class="aui-page-header">
-        <div class="aui-page-header-inner">
-            <div class="aui-page-header-main">
-                <h2>My Plugin Admin Page</h2>
-            </div>
-        </div>
+<section>
+    <header>
+        <h2 class="page-title">My Plugin Admin Page</h2>
     </header>
 
-    <div class="aui-page-panel-content">
-        <div id="my-plugin-container"></div>
-    </div>
+    <div id="my-plugin-container"></div>
 </section>
 
 <script src="$contextPath/download/resources/com.example.my-jira-plugin-backend:split_my-plugin/js/my-plugin.js"></script>

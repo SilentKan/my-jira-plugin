@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import Button from '@atlaskit/button/new';
-import { token } from '@atlaskit/tokens';
 import styled from '@emotion/styled';
 
+const Wrapper = styled.div`
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+`;
+
 const Container = styled.div`
-    padding: ${token('space.200', '16px')};
-    background: ${token('elevation.surface', '#FFF')};
-    max-width: 300px;
-    margin: 32px auto;
+    padding: 24px;
+    background: white;
+    max-width: 320px;
+    width: 100%;
     border-radius: 8px;
-    box-shadow: 0 0 0 1px ${token('color.border', '#DFE1E6')};
+    box-shadow: 0 0 0 1px #dfe1e6;
     text-align: center;
 `;
 
 const Label = styled.h4`
-    margin-bottom: ${token('space.150', '12px')};
+    margin-bottom: 20px; /* увеличенный отступ */
+    font-size: 16px;
 `;
 
 const MyComponent: React.FC = () => {
@@ -27,12 +35,14 @@ const MyComponent: React.FC = () => {
     };
 
     return (
-        <Container>
-            <Label>Простой счётчик</Label>
-            <Button appearance="primary" onClick={handleClick}>
-                Нажми меня
-            </Button>
-        </Container>
+        <Wrapper>
+            <Container>
+                <Label>Простой счётчик</Label>
+                <Button appearance="primary" onClick={handleClick}>
+                    Нажми меня
+                </Button>
+            </Container>
+        </Wrapper>
     );
 };
 
