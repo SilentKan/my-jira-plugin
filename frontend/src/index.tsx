@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import MyComponent from './components/MyComponent';
+import Root from "./components/Root";
 
 (window as any).initMyPlugin = function () {
     const container = document.getElementById('my-plugin-container');
@@ -8,7 +9,7 @@ import MyComponent from './components/MyComponent';
         const root = createRoot(container);
         root.render(
             <React.StrictMode>
-                <MyComponent />
+                <Root/>
             </React.StrictMode>
         );
     }
