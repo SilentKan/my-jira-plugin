@@ -14,10 +14,11 @@
         #my-plugin-container {
             min-height: calc(100vh - 240px);
             display: flex;
-            align-items: flex-start;
-            justify-content: center;
+            flex-direction: column; /* добавлено! */
+            align-items: center; /* по центру, а не влево */
         }
     </style>
+
 </head>
 <body>
 <section>

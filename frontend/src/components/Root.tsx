@@ -10,6 +10,7 @@ const Root = () => {
         <BrowserRouter basename="/plugins/servlet/my-react-page">
             <Navigation />
             <Routes>
+                <Route path="/" element={<div style={{ marginTop: 32 }}>Выберите вкладку выше</div>} />
                 <Route path="/view-local-counter" element={<LocalCounterComponent />} />
                 <Route path="/view-rest" element={<RestComponent />} />
             </Routes>
