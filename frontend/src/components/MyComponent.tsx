@@ -1,58 +1,42 @@
 import React, { useState } from 'react';
 import Button from '@atlaskit/button/new';
-import { PageLayout, Main, Content } from '@atlaskit/page-layout';
 import { Box, xcss } from '@atlaskit/primitives';
 import SectionMessage from '@atlaskit/section-message';
 
-const wrapperStyles = xcss({
+const containerStyles = xcss({
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'column',
     alignItems: 'center',
-    paddingTop: 'space.500',
-});
-
-const cardStyles = xcss({
-    backgroundColor: 'elevation.surface',
-    boxShadow: 'elevation.shadow.raised',
-    padding: 'space.500',
-    borderRadius: 'border.radius.200',
-    textAlign: 'center',
-    width: '100%',
-    maxWidth: '360px',
+    gap: 'space.200',
+    marginTop: 'space.400',
 });
 
 const MyComponent: React.FC = () => {
     const [counter, setCounter] = useState(0);
 
-    const handleClick = () => setCounter((prev) => prev + 1);
+    const handleClick = () => {
+        setCounter((prev) => prev + 1);
+    };
 
     return (
-        <PageLayout>
-            <Content>
-                <Main>
-                    <Box xcss={wrapperStyles}>
-                        <Box xcss={cardStyles}>
-                            <Box xcss={xcss({ marginBottom: 'space.300' })}>
-                                <Button appearance="primary" onClick={handleClick}>
-                                    Нажми меня
-                                </Button>
-                            </Box>
+        <Box xcss={containerStyles}>
+            <Button appearance="primary" onClick={handleClick}>
+                Нажми меня
+            </Button>
 
-                            {counter > 0 && (
-                                <SectionMessage appearance="information">
-                                    <div>
-                                        <strong>Ты нажал {counter} раз</strong>
-                                        <div style={{ marginTop: '8px' }}>
-                                            Нажимай ещё раз, чтобы увеличить счётчик
-                                        </div>
-                                    </div>
-                                </SectionMessage>
-                            )}
-                        </Box>
-                    </Box>
-                </Main>
-            </Content>
-        </PageLayout>
+            {counter > 0 && (
+                <Box as="pre" style={{ whiteSpace: 'pre-wrap', maxWidth: 600 }}>
+                    <SectionMessage appearance="information">
+                        <div>
+                            <strong>Ты нажал {counter} раз</strong>
+                            <div style={{ marginTop: 8 }}>
+                                Нажимай ещё раз, чтобы увеличить счётчик
+                            </div>
+                        </div>
+                    </SectionMessage>
+                </Box>
+            )}
+        </Box>
     );
 };
 

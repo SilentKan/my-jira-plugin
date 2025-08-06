@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '@atlaskit/button/new';
 import { Box, xcss } from '@atlaskit/primitives';
 import Spinner from '@atlaskit/spinner';
+import SectionMessage from "@atlaskit/section-message";
 
 const containerStyles = xcss({
     display: 'flex',
@@ -26,7 +27,7 @@ const RestComponent: React.FC = () => {
             if (!response.ok) {
                 throw new Error(`Ошибка: ${response.status}`);
             }
-            const result = await response.text(); // или .json() если это JSON
+            const result = await response.text();
             setData(result);
         } catch (e: any) {
             setError(e.message || 'Неизвестная ошибка');
@@ -45,7 +46,12 @@ const RestComponent: React.FC = () => {
 
             {data && (
                 <Box as="pre" style={{ whiteSpace: 'pre-wrap', maxWidth: 600 }}>
-                    {data}
+                    <SectionMessage appearance="information">
+                        <div>
+                            <strong>{data}</strong>
+                        </div>
+                    </SectionMessage>
+
                 </Box>
             )}
 
