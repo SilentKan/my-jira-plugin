@@ -1,48 +1,58 @@
 import React, { useState } from 'react';
 import Button from '@atlaskit/button/new';
-import styled from '@emotion/styled';
+import { PageLayout, Main, Content } from '@atlaskit/page-layout';
+import { Box, xcss } from '@atlaskit/primitives';
+import SectionMessage from '@atlaskit/section-message';
 
-const Wrapper = styled.div`
-    margin-top: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-`;
+const wrapperStyles = xcss({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 'space.500',
+});
 
-const Container = styled.div`
-    padding: 24px;
-    background: white;
-    max-width: 320px;
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 0 0 1px #dfe1e6;
-    text-align: center;
-`;
-
-const Label = styled.h4`
-    margin-bottom: 20px; /* увеличенный отступ */
-    font-size: 16px;
-`;
+const cardStyles = xcss({
+    backgroundColor: 'elevation.surface',
+    boxShadow: 'elevation.shadow.raised',
+    padding: 'space.500',
+    borderRadius: 'border.radius.200',
+    textAlign: 'center',
+    width: '100%',
+    maxWidth: '360px',
+});
 
 const MyComponent: React.FC = () => {
     const [counter, setCounter] = useState(0);
 
-    const handleClick = () => {
-        const next = counter + 1;
-        setCounter(next);
-        console.log(`Button clicked ${next} times`);
-    };
+    const handleClick = () => setCounter((prev) => prev + 1);
 
     return (
-        <Wrapper>
-            <Container>
-                <Label>Простой счётчик</Label>
-                <Button appearance="primary" onClick={handleClick}>
-                    Нажми меня
-                </Button>
-            </Container>
-        </Wrapper>
+        <PageLayout>
+            <Content>
+                <Main>
+                    <Box xcss={wrapperStyles}>
+                        <Box xcss={cardStyles}>
+                            <Box xcss={xcss({ marginBottom: 'space.300' })}>
+                                <Button appearance="primary" onClick={handleClick}>
+                                    Нажми меня
+                                </Button>
+                            </Box>
+
+                            {counter > 0 && (
+                                <SectionMessage appearance="information">
+                                    <div>
+                                        <strong>Ты нажал {counter} раз</strong>
+                                        <div style={{ marginTop: '8px' }}>
+                                            Нажимай ещё раз, чтобы увеличить счётчик
+                                        </div>
+                                    </div>
+                                </SectionMessage>
+                            )}
+                        </Box>
+                    </Box>
+                </Main>
+            </Content>
+        </PageLayout>
     );
 };
 
