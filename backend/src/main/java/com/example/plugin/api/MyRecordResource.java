@@ -24,16 +24,24 @@ public class MyRecordResource {
 
     @GET
     public Response getAll() {
-        MyRecord[] records = service.all();
-        return Response.ok(Arrays.stream(records)
-                        .map(r -> String.format("Name: %s, Value: %d", r.getName(), r.getValue()))
-                        .toArray())
-                .build();
+        var list = Arrays.stream(service.all())
+                .map(com.example.plugin.api.dto.MyRecordDto::from)
+                .toArray(com.example.plugin.api.dto.MyRecordDto[]::new);
+        return Response.ok(list).build();
     }
 
     @POST
-    public Response create(MyRecordDto dto) {
-        MyRecord r = service.create(dto.name, dto.value);
-        return Response.ok("Created: " + r.getName()).build();
+    public Response create(com.example.plugin.api.dto.MyRecordDto dto) {
+        var r = service.create(dto.name, dto.value);
+        return Response.status(Response.Status.CREATED)
+                .entity(com.example.plugin.api.dto.MyRecordDto.from(r))
+                .build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response delete(@PathParam("id") int id) {
+        service.delete(id);
+        return Response.noContent().build();
     }
 }

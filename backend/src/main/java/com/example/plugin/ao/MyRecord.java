@@ -11,4 +11,6 @@ public interface MyRecord extends Entity {
 
     int getValue();
     void setValue(int value);
+
+
 }

@@ -20,15 +20,28 @@ public class MyRecordServiceImpl implements MyRecordService {
 
     @Override
     public MyRecord create(String name, int value) {
-        MyRecord record = ao.create(MyRecord.class);
-        record.setName(name);
-        record.setValue(value);
-        record.save();
-        return record;
+        return ao.executeInTransaction(() -> {
+            MyRecord record = ao.create(MyRecord.class);
+            record.setName(name);
+            record.setValue(value);
+            record.save();
+            return record;
+        });
     }
 
     @Override
     public MyRecord[] all() {
         return ao.find(MyRecord.class);
+    }
+
+    @Override
+    public void delete(int id) {
+        ao.executeInTransaction(() -> {
+            MyRecord r = ao.get(MyRecord.class, id);
+            if (r != null) {
+                ao.delete(r);
+            }
+            return null;
+        });
     }
 }
