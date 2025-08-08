@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LocalCounterComponent from './MyComponent';
 import RestComponent from './RestComponent';
 import Navigation from './Navigation';
+import AoComponent from "./AoComponent";
 
 const Root = () => {
     return (
@@ -13,6 +14,7 @@ const Root = () => {
                 <Route path="/" element={<div style={{ marginTop: 32 }}>Выберите вкладку выше</div>} />
                 <Route path="/view-local-counter" element={<LocalCounterComponent />} />
                 <Route path="/view-rest" element={<RestComponent />} />
+                <Route path="/view-ao" element={<AoComponent />} />
             </Routes>
         </BrowserRouter>
     );
