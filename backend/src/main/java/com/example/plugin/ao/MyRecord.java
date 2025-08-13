@@ -3,6 +3,10 @@ package com.example.plugin.ao;
 import net.java.ao.Entity;
 import net.java.ao.Preload;
 
+/**
+ * Указываем jira, что необходимо создать таблицу.
+ * Jira будет использовать базу, к которой уже подключена сама.
+ */
 @Preload
 public interface MyRecord extends Entity {
 
@@ -11,6 +15,5 @@ public interface MyRecord extends Entity {
 
     int getValue();
     void setValue(int value);
-
 
 }

@@ -7,6 +7,7 @@ import com.example.plugin.ao.MyRecord;
 import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 
+// обязательно регистрируем в jira наш сервис с помощью ExportAsService
 @ExportAsService({MyRecordService.class})
 @Component
 public class MyRecordServiceImpl implements MyRecordService {

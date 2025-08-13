@@ -2,7 +2,6 @@ export type RecordDto = { id: number; name: string; value: number };
 
 // window.contextPath доступен, если в web-resource есть зависимость context-path
 const CTX: string = (window as any).contextPath || '';
-// замени my-plugin-key на key твоего REST-модуля
 const BASE = `${CTX}/rest/myplugin/1.0/records`;
 
 function assertOk(res: Response) {

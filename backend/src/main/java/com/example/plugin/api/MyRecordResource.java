@@ -1,8 +1,5 @@
 package com.example.plugin.api;
 
-import com.example.plugin.ao.MyRecord;
-import com.example.plugin.api.dto.MyRecordDto;
-
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

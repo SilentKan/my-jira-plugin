@@ -1,7 +1,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <!-- Декоратор админки. Подключает админ-layout Jira, шапку/левое меню и стили. -->
     <meta name="decorator" content="atl.admin">
+
+    <!-- Подсветка активной секции в левом меню админки.
+    Значение должно соответствовать location секции (web-section в admin_plugins_menu). -->
     <meta name="admin.active.section" content="admin_plugins_menu">
     <title>My Plugin Admin Page</title>
     <style>
@@ -14,8 +18,8 @@
         #my-plugin-container {
             min-height: calc(100vh - 240px);
             display: flex;
-            flex-direction: column; /* добавлено! */
-            align-items: center; /* по центру, а не влево */
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 
@@ -26,9 +30,11 @@
         <h2 class="page-title">My Plugin Admin Page</h2>
     </header>
 
+    <!-- Точка монтирования React. Не меняй id без правки init-кода. -->
     <div id="my-plugin-container"></div>
 </section>
 
+<!-- Подключаем скрипты и иницализируем их -->
 <script src="$contextPath/download/resources/com.example.my-jira-plugin-backend:split_my-plugin/js/my-plugin.js"></script>
 <script>window.initMyPlugin();</script>
 </body>

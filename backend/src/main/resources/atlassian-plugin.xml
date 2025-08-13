@@ -10,17 +10,23 @@
   </plugin-info>
 
 
+  <!-- ЯВНО перечисляем каждую сущность AO.
+       В Jira 10  — добавляйте <entity> на каждую интерфейс-сущность. -->
   <ao key="ao-module" name="My Active Objects">
     <description>Defines AO module</description>
     <entity>com.example.plugin.ao.MyRecord</entity>
+    <!-- Новые сущности => новые <entity> строки. Следите, чтобы интерфейсы AO были видимы плагину. -->
   </ao>
 
+  <!-- Основные артефакты бандла из webpack-вывода, wrm и атласиан плагин не используется. -->
   <web-resource key="split_my-plugin">
     <resource type="download" name="css/my-plugin.css" location="css/my-plugin.css"/>
     <resource type="download" name="js/my-plugin.js" location="js/my-plugin.js"/>
   </web-resource>
 
 
+  <!-- [SERVLET][UI] Отдельная страница под React.
+       Итоговый URL: /plugins/servlet/my-react-page -->
   <servlet name="My React Page Servlet"
            key="my-react-page"
            class="com.example.plugin.MyReactPageServlet">
@@ -28,6 +34,10 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
 
+
+  <!-- [REST][JIRA10] Ресурсы REST сканируются по пакету Jersey (HK2).
+      Держим классы @Path в com.example.plugin.api.*.
+      Не мешай HK2 и Spring без осознанного бриджа: используй конструкторную инъекцию -->
   <rest key="my-rest" path="/myplugin" version="1.0">
     <description>Provides REST endpoints for the plugin</description>
     <package>com.example.plugin.api</package>
