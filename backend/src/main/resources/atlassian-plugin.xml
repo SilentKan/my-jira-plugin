@@ -22,6 +22,9 @@
   <web-resource key="split_my-plugin">
     <resource type="download" name="css/my-plugin.css" location="css/my-plugin.css"/>
     <resource type="download" name="js/my-plugin.js" location="js/my-plugin.js"/>
+
+    <!-- ВАЖНО: ключ data берем, например, bootstrap -->
+    <data key="bootstrap" class="com.example.provider.MyBootstrapDataProvider"/>
   </web-resource>
 
 

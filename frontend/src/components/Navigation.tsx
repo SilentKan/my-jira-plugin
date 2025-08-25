@@ -34,6 +34,9 @@ const Navigation = () => {
             <Link to="/view-ao" style={linkStyle('/view-ao')}>
                 AO Records
             </Link>
+            <Link to="/view-wrm-bootstrap" style={linkStyle('/view-wrm-bootstrap')}>
+                WRM Bootstrap
+            </Link>
         </Box>
     );
 };

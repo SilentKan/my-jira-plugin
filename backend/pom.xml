@@ -164,6 +164,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.atlassian.json</groupId>
+            <artifactId>atlassian-json-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
 
     </dependencies>
 

@@ -36,6 +36,14 @@
 
 <!-- Подключаем скрипты и иницализируем их -->
 <script src="$contextPath/download/resources/com.example.my-jira-plugin-backend:split_my-plugin/js/my-plugin.js"></script>
-<script>window.initMyPlugin();</script>
+<script>
+    require(['wrm/data'], function(WRMData) {
+        var KEY = 'com.example.my-jira-plugin-backend:split_my-plugin.bootstrap';
+        // забираем bootstrap один раз и кладём в window
+        window.APP_BOOTSTRAP = WRMData.claim(KEY) || {};
+        // теперь обычный запуск без аргументов
+        window.initMyPlugin && window.initMyPlugin();
+    });
+</script>
 </body>
 </html>
